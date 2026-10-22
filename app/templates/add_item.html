@@ -1,18 +1,27 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Item</title>
+    <title>Add Item - My Mock Store</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
-    <h1>Add a New Item</h1>
+    <div class="item">
+        <h1>Add a New Item</h1>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-        <button type="submit">Add Item</button>
-    </form>
+            <button type="submit" class="buy-button">
+                Add Item
+            </button>
+        </form>
 
-    <p><a href="/">Back to Store</a></p>
+        <a class="back-link" href="/">Back to Store</a>
+    </div>
 </body>
 </html>

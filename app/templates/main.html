@@ -1,20 +1,40 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>My Mock Store</title>
-</head>
-<body>
-    <h1>My Mock Store</h1>
 
-    {% for item in items %}
-        <div>
-            <h2>{{ item.name }}</h2>
-            <p>{{ item.description }}</p>
-            <p>${{ item.price }}</p>
-            <p>In stock: {{ item.stock }}</p>
-        </div>
-    {% empty %}
-        <p>No items available yet.</p>
-    {% endfor %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <a class="add-button" href="{% url 'add_item' %}">
+        Add New Item
+    </a>
+
+    <div class="items">
+        {% for item in items %}
+            <div class="item">
+                <h2>{{ item.name }}</h2>
+
+                <p>{{ item.description }}</p>
+
+                <p class="price">${{ item.price }}</p>
+
+                {% if item.stock > 0 %}
+                    <p>In stock: {{ item.stock }}</p>
+                    <a class="add-button"
+                       href="{% url 'item_detail' item.name %}">
+                        Buy
+                    </a>
+                {% else %}
+                    <p>Out of stock</p>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No items available yet.</p>
+        {% endfor %}
+    </div>
 </body>
 </html>

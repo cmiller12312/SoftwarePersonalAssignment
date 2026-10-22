@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ item.name }} - My Mock Store</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class="item">
+        <h1>{{ item.name }}</h1>
+
+        <p>{{ item.description }}</p>
+
+        <p class="price">${{ item.price }}</p>
+
+        {% if item.stock > 0 %}
+            <p>In stock: {{ item.stock }}</p>
+
+            <form action="{% url 'buy_item' item.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="buy-button">
+                    Buy Now
+                </button>
+            </form>
+        {% else %}
+            <p>Out of stock</p>
+        {% endif %}
+
+        <a class="back-link" href="/">Back to Store</a>
+    </div>
+</body>
+</html>
