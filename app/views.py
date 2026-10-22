@@ -29,6 +29,4 @@ def buy_item(request, item_id):
             item.stock -= 1
             item.save()
 
-        return redirect("default")
-
     return redirect("default")
